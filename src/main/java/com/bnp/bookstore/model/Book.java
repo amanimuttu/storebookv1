@@ -4,9 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Entity
 @Data
-public class Book {
+public class Book implements Serializable {
 
     @Id
     private String isbn;

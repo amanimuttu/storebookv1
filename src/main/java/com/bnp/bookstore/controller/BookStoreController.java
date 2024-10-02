@@ -1,28 +1,31 @@
 package com.bnp.bookstore.controller;
 
 import com.bnp.bookstore.model.Book;
+import com.bnp.bookstore.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController(value = "/bookstore/books")
+import java.util.List;
+
+@RestController
+@RequestMapping("/bookstore/books")
 public class BookStoreController {
 
-    //list book
+    @Autowired
+    private BookService bookService;
 
-    @GetMapping(value = "/list")
-    ResponseEntity<Book> listBooks(){
-
-        Book book = new Book();
-        return ResponseEntity.ok(book);
+    @GetMapping("/list")
+    ResponseEntity<List<Book>> listBooks(){
+        List<Book> books = bookService.listAllBooks();
+        return ResponseEntity.ok().body(books);
     }
 
-    @PostMapping(value = "/add")
-    ResponseEntity<Book> addBook(){
-
-        Book book = new Book();
-        return ResponseEntity.ok(book);
+    @PostMapping("/add")
+    ResponseEntity<Book> addBook(@RequestBody List<Book> books){
+        bookService.addBooks(books);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     //add book, check for isbn, then increment stock, else new book

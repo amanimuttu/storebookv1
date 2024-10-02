@@ -1,7 +1,7 @@
 package com.bnp.bookstore.service;
 
-import com.bnp.bookstore.model.User;
-import com.bnp.bookstore.repository.UserRepository;
+import com.bnp.bookstore.model.AppUser;
+import com.bnp.bookstore.repository.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +10,11 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-
     @Autowired
-    private UserRepository userRepository;
+    private AppUserRepository appUserRepository;
 
-    public Optional<User> getUser(String username){
+    public Optional<AppUser> getUser(String username){
 
-        return userRepository.findByUsername(username);
+        return appUserRepository.findByUsername(username);
     }
 }

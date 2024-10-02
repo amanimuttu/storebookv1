@@ -1,6 +1,8 @@
 package com.bnp.bookstore.model;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
 
     // id, total price, user, cartitem with price,
 }
